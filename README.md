@@ -264,6 +264,7 @@ final config = SupakiConfig(
 ## 📖 API 문서
 
 자세한 API 문서는 [pub.dev](https://pub.dev/documentation/supaki)에서 확인할 수 있습니다.
+(아직 배포가 안되었습니다.)
 
 ## 🤝 기여하기
 

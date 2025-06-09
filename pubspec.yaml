@@ -1,6 +1,6 @@
 name: supaki
 description: "Comprehensive Flutter Supabase Toolkit - Supabase를 Flutter에서 쉽게 사용할 수 있게 해주는 포괄적인 툴킷"
-version: 1.0.0
+version: 0.1.0
 homepage: https://github.com/parkJS09/supaki
 repository: https://github.com/parkJS09/supaki
 issue_tracker: https://github.com/parkJS09/supaki/issues

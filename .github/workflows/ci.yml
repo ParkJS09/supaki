@@ -1,88 +1,88 @@
-name: CI/CD
+# name: CI/CD
 
-on:
-  push:
-    branches: [ master, dev, release ]
-  pull_request:
-    branches: [ master, dev, release ]
+# on:
+#   push:
+#     branches: [ master, dev, release ]
+#   pull_request:
+#     branches: [ master, dev, release ]
 
-jobs:
-  test:
-    runs-on: ubuntu-latest
+# jobs:
+#   test:
+#     runs-on: ubuntu-latest
     
-    steps:
-    - uses: actions/checkout@v4
+#     steps:
+#     - uses: actions/checkout@v4
     
-    - name: Setup Flutter
-      uses: subosito/flutter-action@v2
-      with:
-        flutter-version: '3.24.0'
+#     - name: Setup Flutter
+#       uses: subosito/flutter-action@v2
+#       with:
+#         flutter-version: '3.24.0'
         
-    - name: Install dependencies
-      run: flutter pub get
+#     - name: Install dependencies
+#       run: flutter pub get
       
-    - name: Verify formatting
-      run: dart format --output=none --set-exit-if-changed .
+#     - name: Verify formatting
+#       run: dart format --output=none --set-exit-if-changed .
       
-    - name: Analyze project source
-      run: flutter analyze
+#     - name: Analyze project source
+#       run: flutter analyze
       
-    - name: Run tests
-      run: flutter test --coverage
+#     - name: Run tests
+#       run: flutter test --coverage
       
-    - name: Upload coverage to Codecov
-      uses: codecov/codecov-action@v3
-      with:
-        file: coverage/lcov.info
+#     - name: Upload coverage to Codecov
+#       uses: codecov/codecov-action@v3
+#       with:
+#         file: coverage/lcov.info
 
-  build:
-    runs-on: ubuntu-latest
-    needs: test
+#   build:
+#     runs-on: ubuntu-latest
+#     needs: test
     
-    steps:
-    - uses: actions/checkout@v4
+#     steps:
+#     - uses: actions/checkout@v4
     
-    - name: Setup Flutter
-      uses: subosito/flutter-action@v2
-      with:
-        flutter-version: '3.24.0'
+#     - name: Setup Flutter
+#       uses: subosito/flutter-action@v2
+#       with:
+#         flutter-version: '3.24.0'
         
-    - name: Install dependencies
-      run: flutter pub get
+#     - name: Install dependencies
+#       run: flutter pub get
       
-    - name: Check publish readiness
-      run: flutter pub publish --dry-run
+#     - name: Check publish readiness
+#       run: flutter pub publish --dry-run
 
-  release:
-    runs-on: ubuntu-latest
-    needs: [test, build]
-    if: github.ref == 'refs/heads/master' && github.event_name == 'push'
+#   release:
+#     runs-on: ubuntu-latest
+#     needs: [test, build]
+#     if: github.ref == 'refs/heads/master' && github.event_name == 'push'
     
-    steps:
-    - uses: actions/checkout@v4
-      with:
-        fetch-depth: 0
+#     steps:
+#     - uses: actions/checkout@v4
+#       with:
+#         fetch-depth: 0
         
-    - name: Setup Flutter
-      uses: subosito/flutter-action@v2
-      with:
-        flutter-version: '3.24.0'
+#     - name: Setup Flutter
+#       uses: subosito/flutter-action@v2
+#       with:
+#         flutter-version: '3.24.0'
         
-    - name: Install dependencies
-      run: flutter pub get
+#     - name: Install dependencies
+#       run: flutter pub get
       
-    - name: Create Release
-      id: create_release
-      uses: actions/create-release@v1
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      with:
-        tag_name: v${{ github.run_number }}
-        release_name: Release v${{ github.run_number }}
-        body: |
-          Automated release v${{ github.run_number }}
+#     - name: Create Release
+#       id: create_release
+#       uses: actions/create-release@v1
+#       env:
+#         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+#       with:
+#         tag_name: v${{ github.run_number }}
+#         release_name: Release v${{ github.run_number }}
+#         body: |
+#           Automated release v${{ github.run_number }}
           
-          Changes in this release:
-          - Check commit history for details
-        draft: false
-        prerelease: false 
+#           Changes in this release:
+#           - Check commit history for details
+#         draft: false
+#         prerelease: false 

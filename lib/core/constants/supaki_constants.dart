@@ -1,7 +1,7 @@
 /// Supaki 관련 상수들
 class SupakiConstants {
   static const String packageName = 'supaki';
-  static const String version = '1.0.0';
+  static const String version = '0.1.0';
 
   // 기본 테이블 이름
   static const String defaultUsersTable = 'users';
